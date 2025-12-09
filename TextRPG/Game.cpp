@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Game.h";
+#include "Game.h"
 
 using namespace std;
 
@@ -26,6 +26,7 @@ void Game::Run() {
 		if (input == 1)
 			player->showInfo();
 		if (input == 2)
+			cout << "게임 종료";
 			isRunning = false;
 	}
 }
