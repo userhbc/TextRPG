@@ -1,5 +1,5 @@
 #include "Monster.h"
-
+#include <cstdlib>
 using namespace std;
 
 
@@ -22,4 +22,12 @@ bool Monster::isDead() {
 	}
 	else
 		return false;
+}
+
+int Monster::AttackFunc() {
+	if (rand() % 10 < 2)
+		return 0;
+	else
+		return attack;
+
 }

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <cstdlib>
 
 using namespace std;
 
@@ -15,4 +16,12 @@ void Player::TakeDamage(int damage) {
     hp -= damage;
     if (hp < 0)
         hp = 0;
+}
+
+int Player::AttackFunc() {
+    if (rand() % 10 < 2)
+        return 0;
+    else
+        return attack;
+
 }

@@ -13,5 +13,6 @@ public:
 	void showInfo();
 	void TakeDamage(int damage);
 	bool isDead();
+	int AttackFunc();
 };
 

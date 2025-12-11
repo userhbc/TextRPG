@@ -44,20 +44,36 @@ void Game::Battle() {
 		cout << player->name << " HP: " << player->hp << '\n'
 			<< slime.name << " HP: " << slime.hp << '\n';
 
-		cout << "1.공격		2.도망" << '\n';
+		cout << "\n1.공격		2.도망" << '\n';
 		cin >> input;
 		if (input == 1) {
-			slime.TakeDamage(player->attack);
-			player->TakeDamage(slime.attack);
-			if (slime.isDead()) {
-				cout << "승리!";
-				break;
+			int damage = player->AttackFunc();
+			if (damage > 0) {
+				cout << "공격 적중! " << damage << "의 데미지를 입혔습니다.\n";
+				slime.TakeDamage(damage);
+
+				if (slime.isDead()) {
+					cout << "승리!" << endl;
+					break;
+				}
 			}
-			else if (player->hp <= 0) {
-				cout << "플레이어 패배 \n 게임 종료";
-				isRunning = false;
-				break;
+			else
+				cout << "공격이 빗나감!\n";
+
+			cout << "몬스터의 반격!\n";
+			int monsterDamage = slime.AttackFunc();
+			if (monsterDamage > 0) {
+				cout << monsterDamage << "의 피해를 입음.\n";
+				player->TakeDamage(monsterDamage);
+
+				if (player->hp <= 0) {
+					cout << "패배했습니다..." << endl;
+					isRunning = false;
+					break;
+				}
 			}
+			else
+				cout << "몬스터의 공격이 빗나갔다!\n";
 		}
 		else if (input == 2) {
 			break;

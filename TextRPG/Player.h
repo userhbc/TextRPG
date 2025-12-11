@@ -12,4 +12,5 @@ public:
 
 	void showInfo();
 	void TakeDamage(int damage);
+	int AttackFunc();
 };
