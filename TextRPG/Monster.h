@@ -1,15 +1,17 @@
 #pragma once
 #include <string>
 #include <iostream>
-
-class Player {
+class Monster
+{
 public:
 	std::string name;
-	int hp = 100;
-	int attack = 10;
+	int hp;
+	int attack;
+	int max_hp = 100;
 
-	Player(std::string n);
-
+	Monster(std::string n, int h, int a);
 	void showInfo();
 	void TakeDamage(int damage);
+	bool isDead();
 };
+
