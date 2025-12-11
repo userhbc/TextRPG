@@ -17,7 +17,6 @@ void Monster::TakeDamage(int damage) {
 
 bool Monster::isDead() {
 	if (hp <= 0) {
-		cout << "몬스터 처치" << '\n';
 		return true;
 	}
 	else

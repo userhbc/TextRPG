@@ -1,10 +1,12 @@
 #include <iostream>
+#include <ctime>
 #include "Game.h"
 #include "Monster.h"
 
 using namespace std;
 
 Game::Game() {
+	srand(time(NULL));
 	isRunning = true;
 
 	string name;
