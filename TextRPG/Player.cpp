@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Player::Player(string n) : name(n) {}
+Player::Player(string n) : Creature(n,100,10){}
 
 void Player::showInfo() {
     cout << "=== [" << name << "]ÀÇ »óÅÂ ===" << endl;
@@ -12,11 +12,6 @@ void Player::showInfo() {
     cout << "=======================" << endl;
 }
 
-void Player::TakeDamage(int damage) {
-    hp -= damage;
-    if (hp < 0)
-        hp = 0;
-}
 
 int Player::AttackFunc() {
     if (rand() % 10 < 2)

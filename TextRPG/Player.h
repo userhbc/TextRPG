@@ -1,16 +1,14 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include "Creature.h"
 
-class Player {
+class Player : public Creature {
 public:
-	std::string name;
-	int hp = 100;
-	int attack = 10;
 
 	Player(std::string n);
 
 	void showInfo();
-	void TakeDamage(int damage);
-	int AttackFunc();
+
+	int AttackFunc() override;
 };
