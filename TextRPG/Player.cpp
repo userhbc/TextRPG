@@ -28,11 +28,12 @@ int Player::AttackFunc() {
 
 bool Player::GetItem(Item* item) {
     string answer;
-    cout << "¾ÆÀÌÅÛ ¹ß°ß È¹µéÇÒ±î?\nY/N" << '\n';
+    cout << "¾ÆÀÌÅÛ ¹ß°ß È¹µæÇÒ±î?\nY/N" << '\n';
     cin >> answer;
     if (answer == "Y" || answer == "y") {
         if (inventory.size() < maxSlot) {
             inventory.push_back(item);
+            cout << item->name << " È¹µæ!" << '\n';
             return true;
         }
         else {

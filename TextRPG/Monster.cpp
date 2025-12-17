@@ -15,5 +15,5 @@ int Monster::AttackFunc() {
 }
 
 Item* Monster::DropItem() {
-	return new Item(name + "의 채액", 5);
+	return new Item(name + "의 체액", 5);
 }
