@@ -1,5 +1,6 @@
 #include "Monster.h"
 #include <cstdlib>
+#include "Item.h"
 using namespace std;
 
 
@@ -11,4 +12,8 @@ int Monster::AttackFunc() {
 	else
 		return attack;
 
+}
+
+Item* Monster::DropItem() {
+	return new Item(name + "ÀÇ Ã¤¾×", 5);
 }

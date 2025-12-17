@@ -56,6 +56,9 @@ void Game::Battle() {
 
 				if (slime.isDead()) {
 					cout << "½Â¸®!" << endl;
+					Item* newItem = slime.DropItem();
+
+					player->GetItem(newItem);
 					break;
 				}
 			}
