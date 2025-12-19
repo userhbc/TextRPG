@@ -115,19 +115,19 @@ void Player::Load() {
         file >> itemCount;
 
         for (int i = 0; i < itemCount; i++) {
-            std::string itemName;
+            string itemName;
             int itemScore;
 
-            file >> itemName;
+            getline(file, itemName);
             file >> itemScore;
 
             inventory.push_back(new Item(itemName, itemScore));
         }
 
         file.close();
-        std::cout << "저장된 데이터를 불러왔습니다!" << std::endl;
+        cout << "저장된 데이터를 불러왔습니다!" << std::endl;
     }
     else {
-        std::cout << "오류: 저장된 파일이 없습니다." << std::endl;
+        cout << "오류: 저장된 파일이 없습니다." << std::endl;
     }
 }
