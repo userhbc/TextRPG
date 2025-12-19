@@ -1,16 +1,19 @@
-#include "Player.h"
+ï»¿#include "Player.h"
 #include <cstdlib>
+#include <fstream>
 
 using namespace std;
 
 Player::Player(string n) : Creature(n,100,10){}
 
 void Player::showInfo() {
-    cout << "=== [" << name << "]ÀÇ »óÅÂ ===" << endl;
-    cout << "Ã¼·Â: " << hp << endl;
-    cout << "°ø°Ý·Â: " << attack << endl;
+    cout << "=== [" << name << "]ì˜ ìƒíƒœ ===" << endl;
+    cout << "Lv." << level << endl;
+    cout << "ê²½í—˜ì¹˜: " << exp << " / " << max_exp << endl;
+    cout << "ì²´ë ¥: " << hp << endl;
+    cout << "ê³µê²©ë ¥: " << attack << endl;
     cout << "=======================" << endl;
-    cout << "--- [°¡¹æ (" << inventory.size() << "/" << maxSlot << ")] ---" << endl;
+    cout << "--- [ê°€ë°© (" << inventory.size() << "/" << maxSlot << ")] ---" << endl;
     for (int i = 0; i < inventory.size(); i++) {
         cout << i + 1 << ". " << inventory[i]->name << '\n';
     }
@@ -28,24 +31,103 @@ int Player::AttackFunc() {
 
 bool Player::GetItem(Item* item) {
     string answer;
-    cout << "¾ÆÀÌÅÛ ¹ß°ß È¹µæÇÒ±î?\nY/N" << '\n';
+    cout << "ì•„ì´í…œ ë°œê²¬ íšë“í• ê¹Œ?\nY/N" << '\n';
     cin >> answer;
     if (answer == "Y" || answer == "y") {
         if (inventory.size() < maxSlot) {
             inventory.push_back(item);
-            cout << item->name << " È¹µæ!" << '\n';
+            cout << item->name << " íšë“!" << '\n';
             return true;
         }
         else {
-            cout << "°¡¹æÀÌ ²Ë Ã¡´Ù! ¾ÆÀÌÅÛ È¹µæ ½ÇÆÐ" << '\n';
+            cout << "ê°€ë°©ì´ ê½‰ ì°¼ë‹¤! ì•„ì´í…œ íšë“ ì‹¤íŒ¨" << '\n';
             delete item;
             return false;
         }
     }
     else {
-        cout << "¾ÆÀÌÅÛÀ» ¹ö·È´Ù" << '\n';
+        cout << "ì•„ì´í…œì„ ë²„ë ¸ë‹¤" << '\n';
         delete item;
         return false;
     }
 
+}
+
+void Player::GetExp(int value) {
+    exp += value;
+    cout << value << " ê²½í—˜ì¹˜ë¥¼ íšë“í–ˆìŠµë‹ˆë‹¤." << '\n';
+    while (exp >= max_exp) {
+        level++;
+        exp -= max_exp;
+
+        max_exp = (int)(max_exp * 1.2);
+        max_hp += 20;
+        hp = max_hp;
+        attack += 3;
+        
+        cout << "ðŸŽ‰ ë ˆë²¨ ì—…! (Lv." << level << ") - ëŠ¥ë ¥ì¹˜ê°€ ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤!" << '\n';
+
+    }
+}
+
+void Player::Save() {
+    ofstream file("save.txt");
+
+    if (file.is_open()) {
+        file << name << '\n';
+        file << level << '\n';
+        file << hp << '\n';
+        file << max_hp << '\n';
+        file << attack << '\n';
+        file << exp << '\n';
+        file << max_exp << '\n';
+
+        file << inventory.size() << '\n';
+        for (Item* item : inventory) {
+            file << item->name << '\n';
+            file << item->score << '\n';
+        }
+
+        file.close();
+        cout << "ì €ìž¥ì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤!" << '\n';
+    }
+    else
+        cout << "ì˜¤ë¥˜ : ì €ìž¥ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤." << '\n';
+
+}
+
+void Player::Load() {
+    std::ifstream file("save.txt");
+
+    if (file.is_open()) {
+        for (Item* item : inventory) { delete item; }
+        inventory.clear();
+
+        file >> name;
+        file >> level;
+        file >> hp;
+        file >> max_hp;
+        file >> attack;
+        file >> exp;
+        file >> max_exp;
+
+        int itemCount;
+        file >> itemCount;
+
+        for (int i = 0; i < itemCount; i++) {
+            std::string itemName;
+            int itemScore;
+
+            file >> itemName;
+            file >> itemScore;
+
+            inventory.push_back(new Item(itemName, itemScore));
+        }
+
+        file.close();
+        std::cout << "ì €ìž¥ëœ ë°ì´í„°ë¥¼ ë¶ˆëŸ¬ì™”ìŠµë‹ˆë‹¤!" << std::endl;
+    }
+    else {
+        std::cout << "ì˜¤ë¥˜: ì €ìž¥ëœ íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤." << std::endl;
+    }
 }

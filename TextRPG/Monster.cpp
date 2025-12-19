@@ -4,7 +4,7 @@
 using namespace std;
 
 
-Monster::Monster(string n, int h, int a) :Creature(n,h,a) {}
+Monster::Monster(string n, int h, int a, int e) :Creature(n,h,a), exp_reward(e) {}
 
 int Monster::AttackFunc() {
 	if (rand() % 10 < 2)

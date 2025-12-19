@@ -8,7 +8,9 @@ class Item;
 class Monster : public Creature
 {
 public:
-	Monster(std::string n, int h, int a);
+	int exp_reward;
+
+	Monster(std::string n, int h, int a, int e);
 	int AttackFunc() override;
 	Item* DropItem();
 };
