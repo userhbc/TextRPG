@@ -1,7 +1,7 @@
 #include "Creature.h"
 #include <cstdlib>
 
-Creature::Creature(std::string n, int h, int a) : name(n), hp(h), attack(a){}
+Creature::Creature(std::string n, int h, int a) : name(n), hp(h), max_hp(h), attack(a){}
 
 void Creature::TakeDamage(int damage) {
     hp -= damage;

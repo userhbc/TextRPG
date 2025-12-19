@@ -7,7 +7,7 @@ class Creature
 public:
 	std::string name;
 	int hp;
-	int max_hp = 100;
+	int max_hp;
 	int attack;
 
 	Creature(std::string n, int h, int a);
